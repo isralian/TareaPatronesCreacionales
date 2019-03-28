@@ -6,6 +6,7 @@
 package SinPatron;
 
 import java.util.Random;
+import javax.swing.JLabel;
 /**
  *
  * @author Israel Padilla
@@ -17,19 +18,40 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        
+        int n = 10;
         Random rand = new Random();
         // Obtain a number.
-
-        Figura[] FigurasArray= new Figura[10];
+        PanelFigura panel=new PanelFigura();
+        panel.setVisible(true);
+        
+        Figura[] FigurasArray= new Figura[n];
+        
         int i;
-        for(i=0;i<FigurasArray.length;i++){
-            FigurasArray[i]=new Figura(i,rand.nextInt(600),rand.nextInt(600),"Rojo",rand.nextInt(4)+1,rand.nextInt(10));        
+        int width = panel.getWidth();
+        int height = panel.getHeight();
+        for(i=0;i<n;i++){
+            FigurasArray[i]=new Figura(i,rand.nextInt(width),rand.nextInt(height));
+            JLabel label = new JLabel();
+            FigurasArray[i].setLabel(label);
+            panel.add(label);
+            label.setLayout(null);
+            label.setSize(20, 20);
+            label.setLocation(FigurasArray[i].getX(), FigurasArray[i].getY());
+            label.setText("O");           
+            label.setVisible(true);
         }
         
-        for(i=0;i<FigurasArray.length;i++){
-            System.out.println(FigurasArray[i].toString());
+        while(true){
+            for(i=0;i<n; i++){
+                FigurasArray[i].moverFigura(width, height);
+                System.out.println(FigurasArray[i].toString());
+            }
         }
+        
+        
+//        for(i=0;i<FigurasArray.length;i++){
+//            System.out.println(FigurasArray[i].toString());
+//        }
     
     
     }
